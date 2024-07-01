@@ -42,7 +42,6 @@ function bubbleSortVisualization() {
             setTimeout(bubbleSortStep, delay);  // Call bubbleSortStep again after a delay
         }
     }
-
     drawArray(array, -1, -1);  // Initial drawing of the array with no comparisons
     setTimeout(bubbleSortStep, delay);  // Start the bubble sort algorithm with a delay
 }

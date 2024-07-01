@@ -6,7 +6,7 @@ function insertionSortVisualization() {
 
     let array = Array.from({ length: 50 }, () => Math.floor(Math.random() * 100));
     let i = 1, j = 0;
-    const delay = 50;
+    const delay = 500;
 
     function drawArray(arr, compareIndex1, compareIndex2) {
         ctx.clearRect(0, 0, canvas.width, canvas.height);
@@ -24,18 +24,21 @@ function insertionSortVisualization() {
         if (i < array.length) {
             let key = array[i];
             j = i - 1;
-            while (j >= 0 && array[j] > key) {
-                array[j + 1] = array[j];
-                j--;
-                drawArray(array, j, j + 1);
-                setTimeout(insertionSortStep, delay);
-                return;
+            function innerStep() {
+                if (j >= 0 && array[j] > key) {
+                    array[j + 1] = array[j];
+                    drawArray(array, j, i);
+                    j--;
+                    setTimeout(innerStep, delay);
+                } else {
+                    array[j + 1] = key;
+                    i++;
+                    setTimeout(insertionSortStep, delay);
+                }
             }
-            array[j + 1] = key;
-            i++;
-            setTimeout(insertionSortStep, delay);
+            innerStep();
         } else {
-            drawArray(array, -1, -1); // Final drawing
+            drawArray(array, -1, -1); 
         }
     }
 

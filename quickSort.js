@@ -5,7 +5,7 @@ function quickSortVisualization() {
     canvas.height = 400;
 
     let array = Array.from({ length: 50 }, () => Math.floor(Math.random() * 100));
-    const delay = 50;
+    const delay = 500;
 
     function drawArray(arr, pivotIndex, compareIndex1, compareIndex2) {
         ctx.clearRect(0, 0, canvas.width, canvas.height);

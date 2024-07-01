@@ -1,13 +1,13 @@
-function mergeSortVisualization() {
+async function mergeSortVisualization() {
     const canvas = document.getElementById('canvas');
     const ctx = canvas.getContext('2d');
     canvas.width = 800;
     canvas.height = 400;
 
     let array = Array.from({ length: 50 }, () => Math.floor(Math.random() * 100));
-    const delay = 50;
+    const delay = 500;
 
-    function drawArray(arr, mergeIndices) {
+    function drawArray(arr, mergeIndices = []) {
         ctx.clearRect(0, 0, canvas.width, canvas.height);
         arr.forEach((val, index) => {
             ctx.fillStyle = mergeIndices.includes(index) ? 'red' : 'blue';
@@ -19,16 +19,16 @@ function mergeSortVisualization() {
         });
     }
 
-    function mergeSort(arr, l, r) {
+    async function mergeSort(arr, l, r) {
         if (l < r) {
             const m = Math.floor((l + r) / 2);
-            mergeSort(arr, l, m);
-            mergeSort(arr, m + 1, r);
-            merge(arr, l, m, r);
+            await mergeSort(arr, l, m);
+            await mergeSort(arr, m + 1, r);
+            await merge(arr, l, m, r);
         }
     }
 
-    function merge(arr, l, m, r) {
+    async function merge(arr, l, m, r) {
         const n1 = m - l + 1;
         const n2 = r - m;
 
@@ -51,6 +51,8 @@ function mergeSortVisualization() {
                 j++;
             }
             k++;
+            drawArray(array, mergeIndices);
+            await new Promise(resolve => setTimeout(resolve, delay));
         }
 
         while (i < n1) {
@@ -58,6 +60,8 @@ function mergeSortVisualization() {
             arr[k] = L[i];
             i++;
             k++;
+            drawArray(array, mergeIndices);
+            await new Promise(resolve => setTimeout(resolve, delay));
         }
 
         while (j < n2) {
@@ -65,12 +69,12 @@ function mergeSortVisualization() {
             arr[k] = R[j];
             j++;
             k++;
+            drawArray(array, mergeIndices);
+            await new Promise(resolve => setTimeout(resolve, delay));
         }
-
-        drawArray(array, mergeIndices);
-        setTimeout(() => {}, delay);
     }
 
-    drawArray(array, []);
-    setTimeout(() => mergeSort(array, 0, array.length - 1), delay);
+    drawArray(array);
+    await mergeSort(array, 0, array.length - 1);
+    drawArray(array);
 }

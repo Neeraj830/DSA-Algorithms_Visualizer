@@ -6,7 +6,7 @@ function linearSearchVisualization() {
 
     let array = Array.from({ length: 50 }, () => Math.floor(Math.random() * 100));
     const searchValue = array[Math.floor(Math.random() * array.length)];
-    const delay = 50;
+    const delay = 200;
 
     function drawArray(arr, compareIndex) {
         ctx.clearRect(0, 0, canvas.width, canvas.height);

@@ -6,7 +6,7 @@ function binarySearchVisualization() {
 
     let array = Array.from({ length: 50 }, () => Math.floor(Math.random() * 100)).sort((a, b) => a - b);
     const searchValue = array[Math.floor(Math.random() * array.length)];
-    const delay = 50;
+    const delay = 500;
 
     function drawArray(arr, compareIndex) {
         ctx.clearRect(0, 0, canvas.width, canvas.height);
